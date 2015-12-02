@@ -7,6 +7,10 @@ if(process.env.ENV == 'PROD') {
 }else {
 	db = mongoose.connect('mongodb://localhost/dev_db');
 }
+db.on('error', console.error.bind(console, 'error connecting to db'));
+db.once('open', function callback(){
+	console.log('db opened');
+});
 var bookCollection = require('./models/bookModel');
 var app = express();
 var port = process.env.PORT || 8000;
