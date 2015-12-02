@@ -1,2 +1,2 @@
 # smallNodeWS
-A small RESTFULL API using Nodejs and Expressjs and Mongoose
+A small RESTFULL API using Nodejs, Expressjs, Mongoose and Gulp.
