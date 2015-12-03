@@ -3,15 +3,18 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var db;
 if(process.env.ENV == 'PROD') {
-	db = mongoose.connect('mongodb://localhost/prod_db');
+	db = mongoose.createConnection('mongodb://localhost/prod_db');
 }else {
-	db = mongoose.connect('mongodb://localhost/dev_db');
+	db = mongoose.createConnection('mongodb://localhost/dev_db');
 }
-console.log('db ' + db);
-//db.on('error', console.error.bind(console, 'error connecting to db'));
-/*db.once('open', function callback(){
+db.on('error', function(err){
+	if(err){
+		console.log('error connecting to db, ' + err);
+	}
+});
+db.once('open', function callback(){
 	console.log('db opened');
-});*/
+});
 var bookCollection = require('./models/bookModel');
 var app = express();
 var port = process.env.PORT || 8000;
