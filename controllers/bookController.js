@@ -1,4 +1,5 @@
 var bookController = function(boookCollection){
+	
 	var post = function(req, res){
 		console.log('calling post with req' + req.body.title);
 		if(!req.body.title){
@@ -16,16 +17,12 @@ var bookController = function(boookCollection){
 			});
 		}
 	}
+
 	var get = function(req, res){
-		var query = {};
-		if(req.query.genre){
-			query.genre = req.query.genre;
-		}
-		boookCollection.find(query, function(err, books){
+		boookCollection.find(req.query, function(err, books){
 			if(err)
 				res.status(500).send(err);
 			else{
-
 				var returnBooks =  [];
 				books.forEach(function(element, index, array){
 					var newbook = element.toJSON();
@@ -91,8 +88,8 @@ var bookController = function(boookCollection){
 				res.status(204).send('removed');
 		});
 	}
-	return {
 
+	return {
 		post : post,
 		get:get,
 		middelware : middelware,

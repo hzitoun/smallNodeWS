@@ -7,10 +7,11 @@ if(process.env.ENV == 'PROD') {
 }else {
 	db = mongoose.connect('mongodb://localhost/dev_db');
 }
-db.on('error', console.error.bind(console, 'error connecting to db'));
-db.once('open', function callback(){
+console.log('db ' + db);
+//db.on('error', console.error.bind(console, 'error connecting to db'));
+/*db.once('open', function callback(){
 	console.log('db opened');
-});
+});*/
 var bookCollection = require('./models/bookModel');
 var app = express();
 var port = process.env.PORT || 8000;
@@ -19,10 +20,10 @@ app.use(bodyParser.json());
 var bookRouter = require('./routes/bookRoutes')(bookCollection);
 app.use('/api/books', bookRouter);
 app.get('/', function(req, res){
-	res.send('Starting NodeJS !');
+	res.send('THE API IS WORKING FINE!');
 });
 app.listen(port, function(){
-	console.log('Running on port : ' + port);
+	console.log('Starting server on port : ' + port);
 });
 
 module.exports = app;
