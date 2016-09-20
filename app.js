@@ -2,9 +2,9 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var db;
-if(process.env.ENV == 'PROD') {
+if (process.env.ENV == 'PROD') {
 	db = mongoose.createConnection('mongodb://localhost/prod_db');
-}else {
+} else {
 	db = mongoose.createConnection('mongodb://localhost/dev_db');
 }
 db.on('error', function(err){
